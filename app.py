@@ -10,8 +10,17 @@ Original file is located at
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+'''from sklearn.preprocessing import StandardScaler'''
 import pickle
+
+import numpy as np
+
+def standard_scaler(X):
+    mean = np.mean(X, axis=0)
+    std = np.std(X, axis=0)
+    scaled_X = (X - mean) / std
+    return scaled_X
+
 
 # Load the pickled model
 with open("tabnet_model.pickle", "rb") as f:
