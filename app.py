@@ -11,7 +11,7 @@ pip install streamlit
 
 pip install pytorch-tabnet
 
-pip install sklearn.preprocessing
+pip install scikit-learn
 
 import streamlit as st
 import pandas as pd
