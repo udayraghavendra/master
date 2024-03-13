@@ -7,7 +7,11 @@ Original file is located at
     https://colab.research.google.com/drive/1AmnarPQD43WpZ2rG3Int65_TqR-xtFlb
 """
 
+pip install streamlit
 
+pip install pytorch-tabnet
+
+pip install sklearn.preprocessing
 
 import streamlit as st
 import pandas as pd
