@@ -12,7 +12,7 @@ import pandas as pd
 import numpy as np
 '''from sklearn.preprocessing import StandardScaler'''
 import pickle
-
+from pytorch_tabnet.tab_model import TabNetClassifier
 import numpy as np
 
 def standard_scaler(X):
