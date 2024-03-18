@@ -172,9 +172,39 @@ def predict_all_models(input_data, model_paths):
             predictions[name] = prediction[0]
     return predictions
 
+# Streamlit UI for sign-in page
+def signin():
+    st.title("Sign In")
 
-# Streamlit UI
-def main():
+    # Input fields for username and password
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    # Sign-in button
+    if st.button("Sign In"):
+        # Add your authentication logic here
+        if username == VALID_USERNAME and password == VALID_PASSWORD:
+            st.success("Logged in successfully!")
+            main_page()  # If credentials are correct, switch to the main page
+        else:
+            st.error("Invalid username or password. Please try again.")
+
+# Streamlit UI for user registration page
+def signup():
+    st.title("Sign Up")
+
+    # Input fields for username and password
+    new_username = st.text_input("New Username")
+    new_password = st.text_input("New Password", type="password")
+
+    # Sign-up button
+    if st.button("Sign Up"):
+        # Add your user registration logic here
+        # For demonstration, we'll print the new username and password
+        st.success(f"User registered successfully! Username: {new_username}, Password: {new_password}")
+
+# Streamlit UI for the main page
+def main_page():
     st.title("Diabetes Prediction App")
     
     # Input fields
@@ -200,34 +230,14 @@ def main():
             else:
                 st.success(f"{name} predicts that the patient is diabetic. Probability: {prediction:.2f}")
 
-    # Display LinkedIn icon
-    st.markdown('<a href="https://www.linkedin.com/in/adabala-uday-raghavendra-kumar-ab35bb1a3/" target="_blank"><img src="https://image.flaticon.com/icons/png/512/174/174857.png" width="30"></a>', unsafe_allow_html=True)
-    
-    # Custom CSS, HTML, and JavaScript
-    st.markdown(
-        """
-        <style>
-            /* Add custom CSS styles here */
-            body {
-                background-color: #f0f2f6;
-            }
-            .footer {
-                position: fixed;
-                left: 0;
-                bottom: 0;
-                width: 100%;
-                background-color: #333;
-                color: white;
-                text-align: center;
-                padding: 10px;
-            }
-        </style>
-        <div class="footer">
-            <p>Custom Footer</p>
-        </div>
-        """
-    , unsafe_allow_html=True)
+# Main function to run the app
+def main():
+    signin()  # Start with the sign-in page
+    signup()  # Provide option to sign up
+
+# Define credentials (you can replace these with your actual credentials)
+VALID_USERNAME = "username"
+VALID_PASSWORD = "password"
 
 if __name__ == "__main__":
     main()
-
