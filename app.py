@@ -130,11 +130,8 @@ def main():
 if __name__ == "__main__":
     main() 
 
-# Footer in Sidebar
-st.markdown(
-    """
-    ---
-    Made with ❤️ by [raghavendra](https://yourwebsite.com)
-    """
-)
+
+# Display LinkedIn icon
+st.markdown('<a href="https://www.linkedin.com/in/adabala-uday-raghavendra-kumar-ab35bb1a3/" target="_blank"><img src="https://image.flaticon.com/icons/png/512/174/174857.png" width="30"></a>', unsafe_allow_html=True)
+
 
