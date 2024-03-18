@@ -102,7 +102,6 @@ def predict_all_models(input_data, model_paths):
 # Streamlit UI
 def main():
     st.title("Diabetes Prediction App")
-    st.write("Please enter patient information:")
     
     # Input fields
     st.subheader("Patient Information")
@@ -134,7 +133,7 @@ if __name__ == "__main__":
 st.markdown(
     """
     ---
-    Made with ❤️ by [Your Name](https://yourwebsite.com)
+    Made with ❤️ by [raghavendra](https://yourwebsite.com)
     """
 )
 
