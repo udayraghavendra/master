@@ -173,7 +173,7 @@ def predict_all_models(input_data, model_paths):
     return predictions
 
 # Streamlit UI for sign-in page
-def signin():
+def signin(registered_users):
     st.title("Sign In")
 
     # Input fields for username and password
@@ -182,15 +182,22 @@ def signin():
 
     # Sign-in button
     if st.button("Sign In"):
-        # Add your authentication logic here
-        if username == VALID_USERNAME and password == VALID_PASSWORD:
-            st.success("Logged in successfully!")
-            main_page()  # If credentials are correct, switch to the main page
+        # Check if username exists in registered users
+        if username in registered_users:
+            # Verify password
+            if registered_users[username] == password:
+                st.success("Logged in successfully!")
+                main_page()  # If credentials are correct, switch to the main page
+                return
+            else:
+                st.error("Invalid password. Please try again.")
+                return
         else:
-            st.error("Invalid username or password. Please try again.")
+            st.error("Username not found. Please sign up first.")
+            return
 
 # Streamlit UI for user registration page
-def signup():
+def signup(registered_users):
     st.title("Sign Up")
 
     # Input fields for username and password
@@ -199,9 +206,15 @@ def signup():
 
     # Sign-up button
     if st.button("Sign Up"):
-        # Add your user registration logic here
-        # For demonstration, we'll print the new username and password
-        st.success(f"User registered successfully! Username: {new_username}, Password: {new_password}")
+        # Check if username already exists
+        if new_username in registered_users:
+            st.error("Username already exists. Please choose a different one.")
+            return
+        else:
+            # Add new user to registered users
+            registered_users[new_username] = new_password
+            st.success(f"User registered successfully! Username: {new_username}")
+            return
 
 # Streamlit UI for the main page
 def main_page():
@@ -232,8 +245,9 @@ def main_page():
 
 # Main function to run the app
 def main():
-    signin()  # Start with the sign-in page
-    signup()  # Provide option to sign up
+    registered_users = {}  # Dictionary to store registered users and their passwords
+    signup(registered_users)  # Provide option to sign up
+    signin(registered_users)  # Start with the sign-in page
 
 # Define credentials (you can replace these with your actual credentials)
 VALID_USERNAME = "username"
