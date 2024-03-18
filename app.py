@@ -178,12 +178,19 @@ def main():
 
     st.title("Diabetes Prediction App")
 
-    # Sidebar with input fields and user guidance
+    # Sidebar with input fields and user documentation
     st.sidebar.title("Patient Information")
     st.sidebar.write("Please enter the following patient information:")
 
-    pregnancies = st.sidebar.number_input("Number of Pregnancies", min_value=0, max_value=17, value=1, help="Total number of pregnancies")
-    glucose = st.sidebar.number_input("Glucose Level", min_value=0, max_value=200, value=100, help="Glucose concentration in plasma")
+    gender = st.sidebar.selectbox("Gender", ["Male", "Female"])
+    
+    # If gender is male, skip the pregnancies input
+    if gender == "Female":
+        pregnancies = st.sidebar.number_input("Number of Pregnancies", min_value=0, max_value=17, value=1, help="Total number of pregnancies")
+    else:
+        pregnancies = 0  # Skip pregnancy for male
+    
+    glucose = st.sidebar.number_input("Glucose Level", min_value=0, max_value=200, value=100, help="Glucose concentration in plasma (mg/dL)")
     blood_pressure = st.sidebar.number_input("Blood Pressure", min_value=0, max_value=122, value=69, help="Blood pressure (mm Hg)")
     skin_thickness = st.sidebar.number_input("Skin Thickness", min_value=0, max_value=99, value=20, help="Triceps skin fold thickness (mm)")
     insulin = st.sidebar.number_input("Insulin Level", min_value=0, max_value=846, value=79, help="Insulin concentration in serum (mu U/ml)")
