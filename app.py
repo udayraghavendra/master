@@ -105,14 +105,14 @@ def main():
     
     # Input fields
     st.subheader("Patient Information")
-    pregnancies = st.number_input("Number of Pregnancies", value='None', min_value=0, max_value=17, help="Total number of pregnancies")
-    glucose = st.number_input("Glucose Level", value='None', min_value=0, max_value=200, help="Glucose concentration in plasma")
-    blood_pressure = st.number_input("Blood Pressure", value='None', min_value=0, max_value=122, help="Blood pressure (mm Hg)")
-    skin_thickness = st.number_input("Skin Thickness", value='None', min_value=0, max_value=99, help="Triceps skin fold thickness (mm)")
-    insulin = st.number_input("Insulin Level", value='None', min_value=0, max_value=846, help="Insulin concentration in serum (mu U/ml)")
-    bmi = st.number_input("BMI", value='None', min_value=0.0, max_value=67.1, help="Body mass index (weight in kg/(height in m)^2)")
-    diabetes_pedigree = st.number_input("Diabetes Pedigree Function", value='None', min_value=0.078, max_value=2.42, step=0.01, help="Diabetes pedigree function")
-    age = st.number_input("Age", value='None', min_value=21, max_value=81, help="Age in years")
+    pregnancies = st.number_input("Number of Pregnancies", value='None', min_value='None', max_value=17, help="Total number of pregnancies")
+    glucose = st.number_input("Glucose Level", value='None', min_value='None', max_value=200, help="Glucose concentration in plasma")
+    blood_pressure = st.number_input("Blood Pressure", value='None', min_value='None', max_value=122, help="Blood pressure (mm Hg)")
+    skin_thickness = st.number_input("Skin Thickness", value='None', min_value='None', max_value=99, help="Triceps skin fold thickness (mm)")
+    insulin = st.number_input("Insulin Level", value='None', min_value='None', max_value=846, help="Insulin concentration in serum (mu U/ml)")
+    bmi = st.number_input("BMI", value='None', min_value='None', max_value=67.1, help="Body mass index (weight in kg/(height in m)^2)")
+    diabetes_pedigree = st.number_input("Diabetes Pedigree Function", value='None', min_value='None', max_value=2.42, step=0.01, help="Diabetes pedigree function")
+    age = st.number_input("Age", value='None', min_value='None', max_value=81, help="Age in years")
 
     # Make prediction button
     st.subheader("Make Prediction")
