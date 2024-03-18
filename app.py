@@ -97,38 +97,7 @@ def predict_all_models(input_data, model_paths):
                 prediction = model.predict(preprocessed_data)
             predictions[name] = prediction[0]
     return predictions
-'''
-# Streamlit UI
-def main():
-    st.title("Diabetes Prediction App")
-    st.write("Enter patient information:")
-    
-    # Input fields
-    pregnancies = st.number_input("Number of Pregnancies", value=1, min_value=0, max_value=17)
-    glucose = st.number_input("Glucose Level", value=100, min_value=0, max_value=200)
-    blood_pressure = st.number_input("Blood Pressure", value=69, min_value=0, max_value=122)
-    skin_thickness = st.number_input("Skin Thickness", value=20, min_value=0, max_value=99)
-    insulin = st.number_input("Insulin Level", value=79, min_value=0, max_value=846)
-    bmi = st.number_input("BMI", value=32.0, min_value=0.0, max_value=67.1)
-    diabetes_pedigree = st.number_input("Diabetes Pedigree Function", value=0.3725, min_value=0.078, max_value=2.42, step=0.01)
-    age = st.number_input("Age", value=35, min_value=21, max_value=81)
 
-    # Make prediction
-    input_data = np.array([[pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree, age]])
-    if st.button("Predict", key="predict_button", help="Click to make a prediction"):
-        predictions = predict_all_models(input_data, model_paths)
-        st.write("<h2>Predictions by Different Models:</h2>", unsafe_allow_html=True)
-        for name, prediction in predictions.items():
-            if prediction < 0.5:
-                st.markdown(f"<h3>{name} predicts that the patient is not diabetic.</h3>", unsafe_allow_html=True)
-                st.write(f"Probability of not being diabetic: {1-prediction:.2f}")
-            else:
-                st.markdown(f"<h3>{name} predicts that the patient is diabetic.</h3>", unsafe_allow_html=True)
-                st.write(f"Probability of being diabetic: {prediction:.2f}")
-
-if __name__ == "__main__":
-    main()
-'''
 
 # Streamlit UI
 def main():
