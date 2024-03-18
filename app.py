@@ -137,6 +137,7 @@ st.markdown('<a href="https://www.linkedin.com/in/adabala-uday-raghavendra-kumar
 import numpy as np
 import pickle
 import streamlit as st
+import time
 
 # Define model names and their corresponding pickle file paths
 model_paths = {
@@ -176,9 +177,14 @@ def predict_all_models(input_data, model_paths):
 def signin(registered_users):
     st.title("Sign In")
 
+    # Generate unique keys for username and password input fields
+    timestamp = str(int(time.time()))
+    signin_username_key = "signin_username_" + timestamp
+    signin_password_key = "signin_password_" + timestamp
+
     # Input fields for username and password
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+    username = st.text_input("Username", key=signin_username_key)
+    password = st.text_input("Password", type="password", key=signin_password_key)
 
     # Sign-in button
     if st.button("Sign In"):
@@ -187,34 +193,37 @@ def signin(registered_users):
             # Verify password
             if registered_users[username] == password:
                 st.success("Logged in successfully!")
-                main_page()  # If credentials are correct, switch to the main page
-                return
+                return True  # Return True upon successful sign-in
             else:
                 st.error("Invalid password. Please try again.")
-                return
         else:
-            st.error("Username not found. Please sign up first.")
-            return
+            st.warning("Username not found. Please sign up first.")
+            if st.button("Sign Up"):
+                signup(registered_users)  # Provide option to sign up
+    return False  # Return False if sign-in fails
 
 # Streamlit UI for user registration page
 def signup(registered_users):
     st.title("Sign Up")
 
-    # Input fields for username and password
-    new_username = st.text_input("New Username")
-    new_password = st.text_input("New Password", type="password")
+    # Generate unique keys for new username and password input fields
+    timestamp = str(int(time.time()))
+    signup_username_key = "signup_username_" + timestamp
+    signup_password_key = "signup_password_" + timestamp
+
+    # Input fields for new username and password
+    new_username = st.text_input("New Username", key=signup_username_key)
+    new_password = st.text_input("New Password", type="password", key=signup_password_key)
 
     # Sign-up button
     if st.button("Sign Up"):
         # Check if username already exists
         if new_username in registered_users:
             st.error("Username already exists. Please choose a different one.")
-            return
         else:
             # Add new user to registered users
             registered_users[new_username] = new_password
             st.success(f"User registered successfully! Username: {new_username}")
-            return
 
 # Streamlit UI for the main page
 def main_page():
@@ -246,12 +255,6 @@ def main_page():
 # Main function to run the app
 def main():
     registered_users = {}  # Dictionary to store registered users and their passwords
-    signup(registered_users)  # Provide option to sign up
-    signin(registered_users)  # Start with the sign-in page
-
-# Define credentials (you can replace these with your actual credentials)
-VALID_USERNAME = "username"
-VALID_PASSWORD = "password"
-
-if __name__ == "__main__":
-    main()
+    while not signin(registered_users):  # Continue sign-in loop until successful sign-in
+        pass  # Continue looping until successful sign-in
+    main_page()  # Once signed in, proceed to the
