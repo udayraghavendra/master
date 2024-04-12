@@ -139,11 +139,9 @@ model_paths = {
 }
 
 # Function to preprocess input data
-def preprocess_input(input_data, gender):
+def preprocess_input(input_data):
     columns = ["Pregnancies", "Glucose Level", "Blood Pressure", "Skin Thickness", "Insulin Level", "BMI", "Diabetes Pedigree Function", "Age"]
     for i in range(len(input_data)):
-        if gender == "Female" and i == 0:  # If female, set pregnancies to 0
-            input_data[i] = 0
         for j in range(len(input_data[i])):
             if input_data[i][j] is None:
                 input_data[i][j] = st.number_input(f"Enter {columns[j]}", min_value=0, step=0.1)
@@ -159,7 +157,7 @@ def predict_all_models(input_data, model_paths):
         elif path.endswith('.joblib'):
             model = joblib.load(path)
         
-        preprocessed_data = preprocess_input(input_data.copy(), gender)
+        preprocessed_data = preprocess_input(input_data.copy())
         # Check if the model supports probability prediction
         if hasattr(model, "predict_proba"):
             probabilities = model.predict_proba(preprocessed_data)
@@ -172,22 +170,9 @@ def predict_all_models(input_data, model_paths):
 
 # Function to render the main page
 def main_page():
-    st.title("Welcome to the Diabetes Prediction App")
-    st.write("Please enter your name:")
-    name = st.text_input("Name")
-    if name:
-        st.write(f"Hi, {name}!")
-        st.write("Please select your gender:")
-        gender = st.selectbox("Gender", ["Male", "Female"])
-        render_details(gender)
-
-# Function to render details for both genders
-def render_details(gender):
+    st.title(" Diabetes Prediction")
     st.write("Please enter the following details:")
-    if gender == "Female":
-        pregnancies = st.number_input("Number of Pregnancies", min_value=0, max_value=17, value=None, help="Total number of pregnancies")
-    else:
-        pregnancies = 0
+    pregnancies = st.number_input("Number of Pregnancies", min_value=0, max_value=17, value=None, help="Total number of pregnancies")
     glucose = st.number_input("Glucose Level", min_value=0, max_value=200, value=None, help="Glucose concentration in plasma (mg/dL)")
     blood_pressure = st.number_input("Blood Pressure", min_value=0, max_value=122, value=None, help="Blood pressure (mm Hg)")
     skin_thickness = st.number_input("Skin Thickness", min_value=0, max_value=99, value=None, help="Triceps skin fold thickness (mm)")
